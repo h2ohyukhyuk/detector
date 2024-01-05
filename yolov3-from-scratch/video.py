@@ -1,17 +1,9 @@
 
 import time
-import torch
-import torch.nn as nn
-import numpy as np
-import cv2
 from .util import *
 import argparse
-import os
-import os.path as osp
 from .darknet import Darknet
 import pickle as pkl
-import pandas as pd
-import random
 
 def arg_parse():
     """
@@ -64,23 +56,6 @@ model.eval()
 classes = load_classes('yolov3-from-scratch/data/coco.names')
 colors = pkl.load(open("yolov3-from-scratch/data/pallete", "rb"))
 
-def write(x, img):
-    c1 = (int(x[1]), int(x[2]))
-    c2 = (int(x[3]), int(x[4]))
-    cls = int(x[-1])
-    #color = random.choice(colors)
-    color = colors[cls % len(colors)]
-    label = "{0}".format(classes[cls])
-
-    cv2.rectangle(img, c1, c2, color, 1)
-
-    t_size = cv2.getTextSize(label, cv2.FONT_HERSHEY_PLAIN, 1, 1)[0]
-    c2 = c1[0] + t_size[0] + 3, c1[1] + t_size[1] + 4
-    cv2.rectangle(img, c1, c2, color, -1)
-    cv2.putText(img, label, (c1[0], c1[1] + t_size[1] + 4), cv2.FONT_HERSHEY_PLAIN, 1, [225, 255, 255], 1)
-    return img
-
-
 # Detection phase
 
 videofile = args.videofile  # or path to the video file.
@@ -129,8 +104,7 @@ while cap.isOpened():
         # list(map(lambda x: write(x, frame), output))
         results = output.cpu().numpy()
         for result in results:
-            #print(result)
-            write(result, frame)
+            draw_results(result, frame, classes, colors)
 
         cv2.imshow("frame", frame)
         key = cv2.waitKey(1)

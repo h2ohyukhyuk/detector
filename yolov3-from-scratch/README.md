@@ -1,5 +1,8 @@
 ### Code
-https://github.com/ayooshkathuria/YOLO_v3_tutorial_from_scratch?ref=blog.paperspace.com
+https://github.com/ayooshkathuria/YOLO_v3_tutorial_from_scratch
+
+### Code with train code
+https://github.com/ayooshkathuria/pytorch-yolo-v3
 
 ### Blog Post
 https://blog.paperspace.com/how-to-implement-a-yolo-v3-object-detector-from-scratch-in-pytorch-part-2/

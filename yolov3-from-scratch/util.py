@@ -207,8 +207,24 @@ def prep_image(img, inp_dim):
     img = torch.from_numpy(img).float().div(255.0).unsqueeze(0)
     return img
 
-
 def load_classes(namesfile):
     fp = open(namesfile, "r")
-    names = fp.read().split("\n")[:-1]
+    names = fp.read().split("\n")
+    names = [n for n in names if n]
     return names
+
+def draw_results(x, img, classes, colors):
+    c1 = (int(x[1]), int(x[2]))
+    c2 = (int(x[3]), int(x[4]))
+    cls = int(x[-1])
+    #color = random.choice(colors)
+    color = colors[cls % len(colors)]
+    label = "{0}".format(classes[cls])
+
+    cv2.rectangle(img, c1, c2, color, 1)
+
+    t_size = cv2.getTextSize(label, cv2.FONT_HERSHEY_PLAIN, 1, 1)[0]
+    c2 = c1[0] + t_size[0] + 3, c1[1] + t_size[1] + 4
+    cv2.rectangle(img, c1, c2, color, -1)
+    cv2.putText(img, label, (c1[0], c1[1] + t_size[1] + 4), cv2.FONT_HERSHEY_PLAIN, 1, [225, 255, 255], 1)
+    return img
