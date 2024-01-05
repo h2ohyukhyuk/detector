@@ -11,5 +11,6 @@ https://herbwood.tistory.com/21
   - GT와 가장 가까운 anchor box와 관련된 bbox관 loss 계산
   - objectness score 는 모든 grid pixel에 loss 계산
   - multi-class loss를 softmax -> bce(sigmoid), bbox에 여러클래스가 있을수 있기때문에.
-  - prediction from multi-scale feature map
+  - prediction across scales
     - 416 input -> 52, 26, 13 feature maps, upsampling, concat -> large, medium, small output
+  - Darknet-53 backbone, 53 layers with shortcut connections
