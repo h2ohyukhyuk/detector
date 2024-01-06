@@ -1,5 +1,4 @@
 #!/bin/bash
-# https://github.com/eriklindernoren/PyTorch-YOLOv3/blob/master/data/get_coco_dataset.sh
 
 # CREDIT: https://github.com/pjreddie/darknet/tree/master/scripts/get_coco_dataset.sh
 
@@ -13,8 +12,6 @@ cd images
 # Download Images
 wget -c "https://pjreddie.com/media/files/train2014.zip" --header "Referer: pjreddie.com"
 wget -c "https://pjreddie.com/media/files/val2014.zip" --header "Referer: pjreddie.com"
-# wget http://images.cocodataset.org/zips/train2014.zip
-# wget http://images.cocodataset.org/zips/val2014.zip
 
 # Unzip
 unzip -q train2014.zip
